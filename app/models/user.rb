@@ -8,6 +8,8 @@ class User < ApplicationRecord
   validates :firstname, presence: true, length: {maximum: 50}
   validates :lastname, presence: false, length: {maximum: 50}
 
+  has_many :tools 
+
   def self.from_omniauth(auth)
   	user = User.where(:email => auth.info.email).first
 

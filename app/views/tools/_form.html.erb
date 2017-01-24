@@ -1,0 +1,90 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		List Your Tool 
+	</div>
+	<div class="panel-body">
+		<div class="container">
+			<%= form_for @tool do |f| %>
+				<div class="row">
+						<div class="form-group">
+							<label>Tool Type</label>
+							<%= f.select :tool_type, [["Drill/Driver", "Drill/Driver"], ["Saw", "Saw"], ["Sanders/Polishers", "Sanders/Polishers"], ["Rotary", "Rotary"], ["Grinders", "Grinders"]], id: "tool_type", prompt: "Select", class: "form-control" %>
+						</div>
+				</div>	
+
+				<div class="row">
+					<div class="form-group">
+						<label>Listing Name</label>
+						<%= f.text_field :listing_name, placeholder: "Be Clear and Descriptive", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label>Model</label>
+						<%= f.text_field :model_type, placeholder: "Make and Model", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label>Summary</label>
+						<%= f.text_area :summary, rows: 5, placeholder: "Descripe the tool and any extra info needed for this tool.", class: "form-control" %>
+					</div>
+				</div>	
+
+				<div class="row">
+					<div class="form-group">
+						<label>Address</label>
+						<%= f.text_field :address, placeholder: "What is this tool's address?", class: "form-control" %>
+					</div>
+				</div>		
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class='form-group'>
+							<%= f.check_box :is_battery%> Battery?						
+						</div>
+						<div class='form-group'>
+							<%= f.check_box :is_cordless%> Cordless? 					
+						</div>
+						<div class='form-group'>
+							<%= f.check_box :is_bag%> Bag or Carrying Case?						
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class='form-group'>
+							<%= f.check_box :is_bits%> Drill Bits? 					
+						</div>
+						<div class='form-group'>
+							<%= f.check_box :is_blades%> Blades? 							
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Nightly Price</label>
+							<div class="input-group">
+								<div class="input-group-addon">$</div>
+								<%= f.text_field :price, placeholder: "$100", class: "form-control" %>
+							</div>	
+						</div>
+					</div>
+				</div>	
+
+				<div class="row">
+					<div class="form-group">
+						<%= f.check_box :active %> Active 
+					</div>
+				</div>	
+
+				<div class="actions">
+					<%= f.submit "Save", class: "btn btn-primary"%>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

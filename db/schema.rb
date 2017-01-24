@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123144619) do
+ActiveRecord::Schema.define(version: 20170124114705) do
+
+  create_table "tools", force: :cascade do |t|
+    t.string   "tool_type"
+    t.string   "model_type"
+    t.string   "listing_name"
+    t.text     "summary"
+    t.string   "address"
+    t.string   "extra_tools"
+    t.string   "dimensions"
+    t.string   "voltage"
+    t.boolean  "is_battery"
+    t.boolean  "is_bag"
+    t.boolean  "is_cordless"
+    t.boolean  "is_blades"
+    t.boolean  "is_bits"
+    t.integer  "price"
+    t.boolean  "active"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_tools_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -14,7 +14,7 @@ class CreateTools < ActiveRecord::Migration[5.0]
       t.boolean :is_cordless
       t.boolean :is_blades
       t.boolean :is_bits
-      t.int :price
+      t.integer :price
       t.boolean :active
       t.references :user, foreign_key: true
 
