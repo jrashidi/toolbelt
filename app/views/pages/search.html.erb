@@ -1,11 +1,3 @@
-<div id="wrapper">
-	<div id="sidebar">
-		<div id="widget" class="sticky">
-			
-		</div>
-	</div>
-
-	<div id="article">
 
 		<div class="row">
 			<%= search_form_for @search, url: search_path do |f| %>
@@ -33,11 +25,14 @@
 				<hr>
 
 				<div class="row">
-					<div class="form-group">
-						<div class="col-md-3">
-							<label>Tool Type</label>
-							<%= f.select :tool_type, [["Drill/Driver", "Drill/Driver"], ["Saw", "Saw"], ["Sanders/Polishers", "Sanders/Polishers"], ["Rotary", "Rotary"], ["Grinders", "Grinders"]], id: "tool_type", prompt: "Select", class: "form-control" %>
-						</div>
+					<div class="col-md-3 ">
+						<%= f.select :tool_type_eq, [["Drill/Driver", "Drill/Driver"], ["Saw", "Saw"], ["Sanders/Polishers", "Sanders/Polishers"], ["Rotary", "Rotary"], ["Grinders", "Grinders"]], id: "tool_type", prompt: "Select", class: "form-control" %>
+					</div>
+					<div class="col-md-3">
+						<%= f.text_field :listing_name_eq, placeholder: "Name", class: "form-control" %>
+					</div>
+					<div class="col-md-3">
+						<%= f.text_field :model_type_eq, placeholder: "Make/Model", class: "form-control" %>
 					</div>
 				</div>
 
@@ -45,16 +40,19 @@
 
 				<div class="row">
 					<div class="col-md-4">
-						<%= check_box_tag "q[tool_type_eq_any][]", "Cordless" %> Cordless 
+						<%= check_box_tag "q[is_cordless_eq_any][]", "Cordless" %> Cordless 
 					</div>
 					<div class="col-md-4">
-						<%= check_box_tag "q[tool_type_eq_any][]", "Carrying Case" %> Carrying Case 
+						<%= check_box_tag "q[is_bag_eq_any][]", "Bag" %> Carrying Case 
 					</div>
 					<div class="col-md-4">
-						<%= check_box_tag "q[tool_type_eq_any][]", "Blades" %> Blades 
+						<%= check_box_tag "q[is_blades_eq_any][]", "Blades" %> Blades 
 					</div>
 					<div class="col-md-4">
-						<%= check_box_tag "q[tool_type_eq_any][]", "Bits" %> Bits  
+						<%= check_box_tag "q[is_bits_eq_any][]", "Bits" %> Bits
+					</div>
+					<div class="col-md-4">
+						<%= check_box_tag "q[is_battery_eq_any][]", "Battery" %> Battery
 					</div>
 				</div>
 
@@ -64,12 +62,12 @@
 					<%= f.submit "Search", class: "btn btn-primary" %>
 				</div>
 
-			<% end %>	
+			<% end %>
 
 			<hr> 
+		</div>
 
-
-			<div class="center-text">
+			<div class="text-center">
 				<h2>Results</h2>
 			</div>
 			<div class="row">
@@ -86,11 +84,6 @@
 					</div>
 				<% end %>
 			</div>
-
-	
-		</div>
-	</div>
-</div>
 
 <script>
 	$(function() {

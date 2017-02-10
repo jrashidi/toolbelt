@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
 
   def home
-  	@tools = Tool.all
+  	@tools = Tool.limit(3)
+    @search= Tool.search(params[:q])
   end
 
   def search
@@ -13,7 +14,7 @@ class PagesController < ApplicationController
   		arrResult = Array.new 
 
   		if session[:loc_search] && session[:loc_search] != ""
-  			@tools_address = Tool.where(active: true).near(session[:loc_search], 10, order: 'distance')
+  			@tools_address = Tool.where(active: true).near(session[:loc_search], 5, order: 'distance')
   		else
   			@tools_address = Tool.where(active: true).all  
   		end 

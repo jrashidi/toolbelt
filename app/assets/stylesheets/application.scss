@@ -238,3 +238,62 @@ input[type="checkbox"]:checked:before {
   padding: 10px;
   margin-bottom: 10px;
 }
+
+.conversation {
+  color: #7f7f7f;
+  padding: 10px;
+}
+
+.conversation:hover, .conversation:focus {
+  background-color: #F4F4F5;
+}
+
+#wrapper { 
+  width:960px;
+  margin:0 auto;
+}
+
+#sidebar {
+  float:right;
+  width:340px;
+}
+
+#sidebar #widget {
+  width:340px;
+  height: 600px;
+  margin-bottom:10px;
+  border-bottom:1px solid #ccc;
+}
+
+#article {
+  width:560px;
+}
+
+.discovery-card {
+  background-size: cover;
+  background-position: center;
+  height: 326px;
+}
+
+.va-container {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.va-middle {
+  color: #fff;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.jumbotron {
+  background-position: center;
+  height: 575px; 
+  margin: 0;
+}
+
+.banner-inner {
+  color: #fff;
+  padding: 100px;
+}
