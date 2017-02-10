@@ -6,19 +6,19 @@
 				<p>The World's Largest Toolbox</p>
 				<%= search_form_for @search, url: search_path do |f| %>
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-3 col-sm-3">
 						<%= f.select :tool_type_eq, [["Drill/Driver", "Drill/Driver"], ["Saw", "Saw"], ["Sanders/Polishers", "Sanders/Polishers"], ["Rotary", "Rotary"], ["Grinders", "Grinders"]], id: "tool_type", prompt: "Select", class: "form-control" %>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3 col-sm-3">
 						<%= text_field_tag :search, params[:search], placeholder: "Address/Location", class: "form-control" %>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2 col-sm-3">
 						<%= text_field_tag :start_date, params[:start_date], placeholder: "Starting Date", class: "form-control" %>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2 col-sm-3">
 						<%= text_field_tag :end_date, params[:end_date], placeholder: "End Date", class: "form-control"%>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2 col-sm-3">
 						<%= submit_tag "Search", class: "btn btn-primary" %>
 					</div>
 				</div>
