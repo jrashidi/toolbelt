@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-	width: 80%;
+  width: 80%;
 }
 
 .navbar-default {
@@ -80,19 +80,19 @@ body {
 }
 
 .avatar-small {
-	width: 28px;
+  width: 28px;
 }
 
 .avatar-medium {
-	width: 48px;
+  width: 48px;
 }
 
 .avatar-large {
-	width: 68px;
+  width: 68px;
 }
 
 .avatar-full {
-	width: 100%;
+  width: 100%;
 }
 
 .form-group {
@@ -181,4 +181,60 @@ input[type="checkbox"]:checked:before {
   text-align: center;
   width: 1.25em;
   color: #ff5a5f;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.panel-heading.preview {
+  padding: 0;
+}
+
+.panel-heading.preview img{  
+  width: 100%;
+}
+
+.amenities li {
+  margin-bottom: 10px;
+  list-style-type: none;
+}
+
+.text-line-through {
+  text-decoration: line-through
+}
+
+.reservation-table td {
+  width: 100%;
+  border: 1px solid #dce0e0;
+  padding: 10px;
+}
+
+.wide {
+  width: 100%;
+}
+
+.price_tag {
+  background-color: #606567;
+  color: #fff;
+  font-size: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
 }

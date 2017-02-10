@@ -1,2 +1,153 @@
-<h1>Tools#show</h1>
-<p>Find me in app/views/tools/show.html.erb</p>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+
+					<div class="col-md-9">
+						<h4><%= @tool.listing_name %></h4>
+						<%= @tool.address %>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!--Reservation Form-->
+		<div class="col-md-4">
+			<%= render "reservations/form" %>
+		</div>
+
+		<!-- About -->
+		<div class="row">
+			<div class="col-md-12">
+				<H2>About This Tool</H2>
+				<p><%= @tool.summary %></p>
+			</div>
+		</div>
+
+		<!-- Traits -->
+		<div class="row">
+			<div class="col-md-2">
+				<p>Features</p>
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-6">
+						<ul class="amenities">
+							<li class="<%= 'text-line-through' if !@tool.is_battery %>">Battery</li>
+							<li class="<%= 'text-line-through' if !@tool.is_bag %>">Bag</li>
+							<li class="<%= 'text-line-through' if !@tool.is_cordless %>">Cordless</li>
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<ul class="amenities">
+							<li class="<%= 'text-line-through' if !@tool.is_blades %>">Blades</li>
+							<li class="<%= 'text-line-through' if !@tool.is_bits %>">Bits</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Carousel -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				  
+					<% if @photos %>
+						<!-- Indicators -->
+				    <ol class="carousel-indicators">
+							<% @photos.each do |photo| %>
+								<li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
+							<% end %>	
+						</ol>				
+					<% end %>     
+
+				  <div class="carousel-inner" role="listbox">
+				    <% if @photos %>				
+							<% @photos.each do |photo| %>
+								<div class="item <%= 'active' if photo.id == @photos[0].id %>">          
+				          <%= image_tag photo.image.url() %>
+				        </div>
+							<% end %>	
+						<% end %>
+				  </div>
+
+				  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+		</div>
+
+		<!-- User Info-->
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-3 text-center">
+						<%= @tool.user.firstname %>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Google Maps--> 
+
+		<br>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<div id="map"></div>
+
+				<style>
+		      		#map {
+		        		height: 400px;
+		        		width: 100%;
+      					 }
+    			</style>
+
+    			<script>
+				  	function initMap() {
+				       var uluru = {lat: <%= @tool.latitude %>, lng: <%= @tool.longitude %>};
+				       var map = new google.maps.Map(document.getElementById('map'), {
+				          zoom: 14,
+				          center: uluru
+				        });
+				        var marker = new google.maps.Marker({
+				          position: uluru,
+				          map: map
+				        });
+				      }
+    			</script>
+    			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-dRXp_ykK4a4Vin1CFnJ5IGO9g_-jujw&callback=initMap">
+    			</script>
+			</div>
+		</div>
+
+		<!-- Close By Tools -->
+		<H3>Other Tools Nearby</H3>
+		<div class="row">
+			<% for tool in @tool.nearbys(10) %>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading preview">
+							<%= image_tag tool.photos[0].image.url(:medium) %>
+						</div>
+						<div class="panel panel-body">
+							<%= link_to tool.listing_name, tool %><br>
+							<%= tool.distance.round(2) %> miles away
+						</div>
+					</div>
+				</div>
+
+			<% end %>
+		</div>
+
+
+	</div>
+</div>

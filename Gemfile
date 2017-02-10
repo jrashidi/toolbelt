@@ -19,6 +19,10 @@ gem 'devise'
 gem 'toastr-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'paperclip'
+gem 'geocoder'
+gem 'jquery-ui-rails'
+gem 'ransack'
 
 
 group :development, :test do

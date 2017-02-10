@@ -10,5 +10,16 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
   resources :tools
+  resources :photos 
 
+  resources :tools do 
+  	resources :reservations, only: [:create]
+  end 
+
+  get '/preload' => 'reservations#preload'
+  get '/preview' => 'reservations#preview'
+
+  get '/your_rentals' => 'reservations#your_rentals'
+  get '/your_reservations' => 'reservations#your_reservations'
+  get '/search' => 'pages#search'
 end

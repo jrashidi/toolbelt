@@ -1,2 +1,75 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= form_tag search_path, method: :get do %>
+	<div class="row">
+		<div class="col-md-6">
+			<%= text_field_tag :search, params[:search], placeholder: "What are you looking for?", class: "form-control" %>
+		</div>
+		<div class="col-md-2">
+			<%= text_field_tag :start_date, params[:start_date], placeholder: "Starting Date", class: "form-control" %>
+		</div>
+		<div class="col-md-2">
+			<%= text_field_tag :end_date, params[:end_date], placeholder: "End Date", class: "form-control"%>
+		</div>
+		<div class="col-md-2">
+			<%= submit_tag "Search", class: "btn btn-primary" %>
+		</div>
+	</div>
+<% end %>
+<hr>
+
+<div class="text-center">
+	<h2>Our Locations</h2>
+</div>
+<div class="row">
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%= image_tag("new_york.jpg", alt: "New York City")%>
+      <div class="caption">
+        <h3 class="text-center">New York City</h3>
+      </div>
+    </div>
+  </div>
+
+   <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%= image_tag("san_francisco.jpg", alt: "San Francisco")%>
+      <div class="caption">
+        <h3 class="text-center">San Francisco</h3>
+      </div>
+    </div>
+  </div>
+
+   <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%= image_tag("chicago.jpg", alt: "Chicago")%>
+      <div class="caption">
+        <h3 class="text-center">Chicago</h3>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+	$(function() {
+		$("#start_date").datepicker({
+			dateFormat: 'dd-mm-yy',
+			minDate: 0,
+			maxDate: '3m',
+			onSelect: function(selected) {
+				$('#end_date').datepicker("option", "minDate", selected);
+				$('#end_date').attr('disabled', false);
+			}
+		});
+
+		$("#end_date").datepicker({
+			dateFormat: 'dd-mm-yy',
+			minDate: 0,
+			maxDate: '3m',
+			onSelect: function(selected) {
+				$('#start_date').datepicker("option", "maxDate", selected);
+			}
+		});
+	})
+</script>
