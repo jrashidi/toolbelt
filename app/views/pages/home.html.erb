@@ -1,11 +1,10 @@
 <div class="row">
 	<div class="jumbotron" style="background-image: url('/assets/banner.jpg')">
-		<div class="container">
+		<div class="container", style="padding: 50px">
 			<div class="banner-inner text-center">
 				<h1>Welcome To ToolBelt</h1>
 				<p>The World's Largest Toolbox</p>
-			</div>
-			<%= search_form_for @search, url: search_path do |f| %>
+				<%= search_form_for @search, url: search_path do |f| %>
 				<div class="row">
 					<div class="col-md-3">
 						<%= f.select :tool_type_eq, [["Drill/Driver", "Drill/Driver"], ["Saw", "Saw"], ["Sanders/Polishers", "Sanders/Polishers"], ["Rotary", "Rotary"], ["Grinders", "Grinders"]], id: "tool_type", prompt: "Select", class: "form-control" %>
@@ -24,6 +23,7 @@
 					</div>
 				</div>
 			<% end %>
+			</div>
 		</div>
 	</div>
 	
