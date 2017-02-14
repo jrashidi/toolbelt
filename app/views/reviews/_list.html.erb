@@ -1,0 +1,29 @@
+<% if @reviews.blank? %>
+	<div class="text-center">
+		<H3>This tool has no reviews, you can be the first!</H3>
+	</div>
+<% else %>
+	<% @reviews.order("id desc").each do |review|%>
+		<hr>
+		<div class="row">
+			<div class="col-md-1">
+				<%= review.user.firstname %>
+			</div>
+			<div class="col-md-11">
+				<div>
+					<strong><%= r.star %></strong>
+					<span class="pull-right">
+						<%= link_to "Remove My Review", [@tool, review], method: :delete, data: {confirm: "Are You Sure"} if current_user && current_user == review.user %>
+					</span>
+				</div>
+				<div>
+					<%= review.created_at.strftime("%v")%>
+				</div>
+				<div>
+					<%= review.comment %>
+				</div>
+			</div>
+		</div>
+
+	<% end %>
+<% end %>

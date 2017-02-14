@@ -1,0 +1,11 @@
+<%= form_for ([@tool, @tool.reviews.new]) do |f| %>
+	<%= f.text_field :star %>
+	<%= f.text_field :comment %>
+
+	<%= f.hidden_field :tool_id, value: @tool.id %>
+
+	<div class="actions">
+		<% f.submit "Submit Your Review" %>
+	</div>
+
+<% end %>	

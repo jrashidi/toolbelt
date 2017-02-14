@@ -9,6 +9,12 @@ class ToolsController < ApplicationController
 
   def show
     @photos = @tool.photos 
+
+    @booked = Reservation.where("tool_id = ? AND user_id = ?", @tool.id, current_user.id).present? if current_user
+
+    @reviews = @tool.reviews 
+    @hasReview = @reviews.find_by(user: current_user.id) if current_user
+
   end
 
   def new
