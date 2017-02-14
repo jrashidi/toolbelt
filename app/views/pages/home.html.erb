@@ -26,76 +26,75 @@
 			</div>
 		</div>
 	</div>
-	
 </div>
 
 <div class="container">
 
-<div class="text-center">
-	<h2>Where We Are Located</h2>
-</div>
+	<div class="text-center">
+		<h2>Where We Are Located</h2>
+	</div>
 
-<br>
+	<br>
 
-<div class="row">
-	<div class="col-md-4 col-sm-12">
-		<div class="discovery-card" style="background-image: url('/assets/new_york.jpg')">
-			<div class="va-container">
-				<div class="va-middle text-center">
-					<h2><strong>New York</strong></h2>
+	<div class="row">
+		<div class="col-md-4 col-sm-12">
+			<div class="discovery-card" style="background-image: url('/assets/new_york.jpg')">
+				<div class="va-container">
+					<div class="va-middle text-center">
+						<h2><strong>New York</strong></h2>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-sm-6">
+			<div class="discovery-card" style="background-image: url('/assets/chicago.jpg')">
+				<div class="va-container">
+					<div class="va-middle text-center">
+						<h2><strong>Chicago</strong></h2>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-sm-6">
+			<div class="discovery-card" style="background-image: url('/assets/san_francisco.jpg')">
+				<div class="va-container">
+					<div class="va-middle text-center">
+						<h2><strong>San Francisco</strong></h2>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="col-md-4 col-sm-6">
-		<div class="discovery-card" style="background-image: url('/assets/chicago.jpg')">
-			<div class="va-container">
-				<div class="va-middle text-center">
-					<h2><strong>Chicago</strong></h2>
-				</div>
-			</div>
-		</div>
+	<br>
+
+	<div class="text-center">
+		<h2>What Are You Missing?</h2>
+		<p>The tool you need is right around the corner</p>
 	</div>
 
-	<div class="col-md-4 col-sm-6">
-		<div class="discovery-card" style="background-image: url('/assets/san_francisco.jpg')">
-			<div class="va-container">
-				<div class="va-middle text-center">
-					<h2><strong>San Francisco</strong></h2>
+	<br>
+
+	<div class="row">
+		<% @tools.each do |tool| %>
+			
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading preview">
+						<%= image_tag tool.photos[0].image.url(:medium) if tool.photos.length > 0 %>
+					</div>
+					<div class="panel-body">
+						<%= link_to tool.listing_name, tool %>
+					</div>
 				</div>
 			</div>
-		</div>
+
+		<% end %>
 	</div>
-</div>
 
-<br>
-
-<div class="text-center">
-	<h2>What Are You Missing?</h2>
-	<p>The tool you need is right around the corner</p>
-</div>
-
-<br>
-
-<div class="row">
-	<% @tools.each do |tool| %>
 		
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading preview">
-					<%= image_tag tool.photos[0].image.url(:medium) if tool.photos.length > 0 %>
-				</div>
-				<div class="panel-body">
-					<%= link_to tool.listing_name, tool %>
-				</div>
-			</div>
-		</div>
-
-	<% end %>
-</div>
-
-	
 </div>
 <hr>
 
