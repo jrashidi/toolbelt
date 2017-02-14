@@ -1,5 +1,6 @@
 <div class="container">
-			<div class="row">
+	<div class="col-md-6">
+		<div class="row">
 			<%= search_form_for @search, url: search_path do |f| %>
 
 				<div class="row">
@@ -84,7 +85,42 @@
 					</div>
 				<% end %>
 			</div>
-	
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div id="map"></div>
+
+			<style>
+	      		#map {
+	        		height: 600px;
+	        		width: 100%;
+  					 }
+			</style>
+
+			<script>
+			  	function initMap() {
+			       var map = new google.maps.Map(document.getElementById('map'), {
+		        	<% if @arrTools.length > 0 %>
+			          center: new google.maps.LatLng(<%= @arrTools[0].latitude %>, <%= @arrTools[0].longitude %>),
+			        <% else %>  
+			        	center: new google.maps.LatLng(44.5403, -78.5463),
+			        <% end %>  
+		          	zoom: 14,
+			        });
+
+			        <% @arrTools.each do |tool| %>	
+				        var marker = new google.maps.Marker({
+				        	position: new google.maps.LatLng(<%= tool.latitude %>, <%= tool.longitude %>),
+				        });
+
+				        marker.setMap(map);
+			        <% end %>
+			      }
+			</script>
+			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-dRXp_ykK4a4Vin1CFnJ5IGO9g_-jujw&callback=initMap">
+			</script>
+		</div>
+	</div>	
 </div>
 
 <script>
@@ -108,4 +144,31 @@
 			}
 		});
 	})
+</script>
+
+<script>
+	
+	$(function(){ // document ready
+ 
+	  if (!!$('.map').offset()) { // make sure ".sticky" element exists
+	 
+	    var stickyTop = $('.map').offset().top; // returns number 
+	 
+	    $(window).scroll(function(){ // scroll event
+	 
+	      var windowTop = $(window).scrollTop(); // returns number 
+	 
+	      if (stickyTop < windowTop){
+	        $('.map').css({ position: 'fixed', top: 0 });
+	      }
+	      else {
+	        $('.map').css('position','static');
+	      }
+	 
+	    });
+	 
+	  }
+	 
+	});
+
 </script>
