@@ -1,11 +1,24 @@
-<%= form_for ([@tool, @tool.reviews.new]) do |f| %>
-	<%= f.text_field :star %>
-	<%= f.text_field :comment %>
+<%= form_for([@tool, @tool.reviews.new]) do |f| %>
+	
+	<div id="user_stars"></div>
+
+	<div class="form-group">
+		<%= f.text_area :comment, rows: 3, class: "form-control" %>	
+	</div>
+	
 
 	<%= f.hidden_field :tool_id, value: @tool.id %>
 
 	<div class="actions">
-		<% f.submit "Submit Your Review" %>
+		<%= f.submit "Create", class: "btn btn-primary" %>
 	</div>
 
-<% end %>	
+<% end %>
+
+<script>
+	$('#user_stars').raty({
+		path: '/assets',
+		scoreName: 'review[star]',
+		score: 1
+	});
+</script>
