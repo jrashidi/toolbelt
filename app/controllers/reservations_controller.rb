@@ -27,7 +27,10 @@ class ReservationsController < ApplicationController
 	end 
 
 	def destroy 
+		@reservation = Reservation.find(params[:id])
+		@reservation.destroy 
 
+		redirect_to your_reservations_path, notice: "This Reservation Was Canceled"
 	end 
 
 	def your_rentals 
@@ -39,15 +42,14 @@ class ReservationsController < ApplicationController
 	end 
 
 	private 
+		def is_conflict(start_date, end_date)
+			tool = Tool.find(params[:tool_id])
 
-	def is_conflict(start_date, end_date)
-		tool = Tool.find(params[:tool_id])
+			check = tool.reservations.where("? < start_date AND end_date < ?", start_date, end_date)
+			check.size > 0? true : false
+		end
 
-		check = tool.reservations.where("? < start_date AND end_date < ?", start_date, end_date)
-		check.size > 0? true : false
-	end
-
-	def reservations_params 
-		params.require(:reservation).permit(:start_date, :end_date, :price, :total, :tool_id)
-	end 
+		def reservations_params 
+			params.require(:reservation).permit(:start_date, :end_date, :price, :total, :tool_id)
+		end 
 end 

@@ -1,4 +1,4 @@
-class ReviewsControler < ApplicationController 
+class ReviewsController < ApplicationController 
 	def create 
 		@review = current_user.reviews.create(review_params)
 		redirect_to @review.tool
