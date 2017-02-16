@@ -15,11 +15,17 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'toastr-rails'
+
 gem 'omniauth'
 gem 'omniauth-facebook'
+
 gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
+
 gem 'geocoder'
+
 gem 'jquery-ui-rails'
+
 gem 'ransack'
 
 
