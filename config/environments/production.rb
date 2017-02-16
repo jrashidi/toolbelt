@@ -24,7 +24,7 @@ Rails.application.configure do
   config.paperclip_defaults = {
     storage: :s3,
     s3_credentials: {
-      bucket: ENV.fetch('toolbucket'),
+      bucket: ENV.fetch('toolphotos'),
       access_key_id: ENV.fetch('AKIAJKCZLWWZP2ALPWUQ'),
       secret_access_key: ENV.fetch('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'),
       s3_region: ENV.fetch('us-east-1'),
