@@ -26,25 +26,34 @@ class ReservationsController < ApplicationController
 		redirect_to @reservation.tool, notice: "Your Rental Is Pending Approval"
 	end 
 
+	def update
+		@reservations = Reservation.find(params[:id])
+		@reservations.update_attributes(confirmation: true)
+
+		redirect_to your_reservations_path, notice: "Reservation Confirmed"
+
+	end 
+
 	def destroy 
 		@reservation = Reservation.find(params[:id])
 		@reservation.destroy 
 
-		redirect_to your_reservations_path, notice: "This Reservation Was Canceled"
+		redirect_to your_rentals_path, notice: "This Reservation Was Canceled"
 	end 
 
 	def your_rentals 
 		@rentals = current_user.reservations
-
 	end 
 
-	def pending_reservations
-		@tools = current_user.tools.where("pending = ?", confirmed)
-	end 
 
 	def your_reservations
 		@tools = current_user.tools
 	end 
+
+	def pending_reservations
+		@tools = current_user.tools		
+	end 
+
 
 	private 
 		def is_conflict(start_date, end_date)
@@ -55,6 +64,6 @@ class ReservationsController < ApplicationController
 		end
 
 		def reservations_params 
-			params.require(:reservation).permit(:start_date, :end_date, :price, :total, :tool_id)
+			params.require(:reservation).permit(:start_date, :end_date, :price, :total, :tool_id, :confirmation)
 		end 
 end 

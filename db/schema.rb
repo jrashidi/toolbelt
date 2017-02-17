@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214171054) do
+ActiveRecord::Schema.define(version: 20170217135839) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "sender_id"
@@ -47,8 +47,9 @@ ActiveRecord::Schema.define(version: 20170214171054) do
     t.datetime "end_date"
     t.integer  "price"
     t.integer  "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "confirmation", default: false
     t.index ["tool_id"], name: "index_reservations_on_tool_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
