@@ -35,6 +35,11 @@ class ReservationsController < ApplicationController
 
 	def your_rentals 
 		@rentals = current_user.reservations
+
+	end 
+
+	def pending_reservations
+		@tools = current_user.tools.where("pending = ?", confirmed)
 	end 
 
 	def your_reservations

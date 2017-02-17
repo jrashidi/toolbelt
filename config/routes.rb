@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :photos 
 
   resources :tools do 
-  	resources :reservations, only: [:create]
+  	resources :reservations, only: [:create, :destroy]
   end 
 
   resources :conversations, only: [:index, :create] do 
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get '/preload' => 'reservations#preload'
   get '/preview' => 'reservations#preview'
 
+  get '/pending_reservations' => 'reservations#pending_reservations'
   get '/your_rentals' => 'reservations#your_rentals'
   get '/your_reservations' => 'reservations#your_reservations'
   get '/search' => 'pages#search'

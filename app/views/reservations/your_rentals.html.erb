@@ -19,13 +19,16 @@
 					<div class=" col-md-3">
 						<%= rental.start_date.strftime('%v') %>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<%= link_to tool_path(rental.tool) do %>
 						<%= image_tag rental.tool.photos[0].image(:thumb) if rental.tool.photos.length > 0 %>
 						<% end %>
 					</div>
-					<div class="col-md-3 right">
+					<div class="col-md-3">
 						<h4> <%= rental.total %></h4>
+					</div>
+					<div class="col-md-3">
+						<%= link_to "Cancel Reservation", tool_reservation_path(rental.tool, rental), :method => :delete, data: {confirm: "Are you sure you want to cancel this reservation?"}, class: "btn" %>
 					</div>
 				</div>	
 				<hr>
@@ -35,7 +38,7 @@
 			</div>
 		</div>
 	</div>
-</div>s
+</div>
 	
 </div>
 

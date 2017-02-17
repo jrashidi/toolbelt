@@ -1,44 +1,46 @@
 <div class="container">
 	<div class='row'>
-	<div class="col-md-3">
-		<ul class="sidebar-list">
-			<li class="sidebar-item"><%= link_to "Your Listing", tools_path, class: "sidebar-link" %></li>
-			<li class="sidebar-item"><%= link_to "Upcoming Reservations", your_reservations_path, class: "sidebar-link active" %></li>
-			<li class="sidebar-item"><%= link_to "Your Rentals", your_rentals_path, class: "sidebar-link" %></li>
-		</ul>
-	</div>
-	<div class="col-md-9">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Your Reservations
-			</div>
-			<div class="panel-body">
+		<div class="col-md-3">
+			<ul class="sidebar-list">
+				<li class="sidebar-item"><%= link_to "Your Listing", tools_path, class: "sidebar-link" %></li>
+				<li class="sidebar-item"><%= link_to "Upcoming Reservations", your_reservations_path, class: "sidebar-link active" %></li>
+				<li class="sidebar-item"><%= link_to "Your Rentals", your_rentals_path, class: "sidebar-link" %></li>
+			</ul>
+		</div>
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Your Reservations
+				</div>
+				<div class="panel-body">
 
-			<% @tools.each do |tool| %>
+				<% @tools.each do |tool| %>
 
-			<% tool.reservations.each do |reservation| %>
-				<div class="row">
-					<div class=" col-md-3">
-						<%= reservation.start_date.strftime('%v') %>
-					</div>
-					<div class="col-md-6">
-						<%= link_to tool_path(reservation.tool) do %>
-						<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
-						<% end %>
-					</div>
-					<div class="col-md-3 right">
-						<h4> <%= reservation.total %></h4>
-					</div>
-				</div>	
-				<hr>
+				<% tool.reservations.each do |reservation| %>
+					<div class="row">
+						<div class=" col-md-3">
+							<%= reservation.start_date.strftime('%v') %>
+						</div>
+						<div class="col-md-3">
+							<%= link_to tool_path(reservation.tool) do %>
+							<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
+							<% end %>
+						</div>
+						<div class="col-md-3 right">
+							<h4> <%= reservation.total %></h4>
+						</div>
+						<div class="col-md-3">
+							<%= link_to "Cancel Reservations", root_path, class: "btn btn-primary" %>
+						</div>
+					</div>	
+					<hr>
+					<% end %>
+
 				<% end %>
 
-			<% end %>
-
-
+				</div>
 			</div>
 		</div>
-	</div>
-</div>s
+</div>
 	
 </div>
