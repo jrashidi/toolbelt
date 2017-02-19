@@ -1,48 +1,58 @@
 <div class="container">
 	<div class='row'>
-	<div class="col-md-3">
-		<ul class="sidebar-list">
-			<li class="sidebar-item"><%= link_to "Your Listing", tools_path, class: "sidebar-link" %></li>
-			<li class="sidebar-item"><%= link_to "Pending Reservatons", pending_reservations_path, class: "sidebar-link active"%></li>
-			<li class="sidebar-item"><%= link_to "Upcoming Reservations", your_reservations_path, class: "sidebar-link" %></li>
-			<li class="sidebar-item"><%= link_to "Your Rentals", your_rentals_path, class: "sidebar-link" %></li>
-		</ul>
-	</div>
-	<div class="col-md-9">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Reservations Pending Your Approval
-			</div>
-			<div class="panel-body">
+		<div class="col-md-3">
+			<ul class="sidebar-list">
+				<li class="sidebar-item"><%= link_to "Your Listing", tools_path, class: "sidebar-link" %></li>
+				<li class="sidebar-item"><%= link_to "Pending Reservatons", pending_reservations_path, class: "sidebar-link active"%></li>
+				<li class="sidebar-item"><%= link_to "Upcoming Reservations", your_reservations_path, class: "sidebar-link" %></li>
+				<li class="sidebar-item"><%= link_to "Your Rentals", your_rentals_path, class: "sidebar-link" %></li>
+			</ul>
+		</div>
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Reservations Pending Your Approval
+				</div>
+				<div class="panel-body">
 
+					<% @tools.each do |tool| %>	
 
-				<% @tools.each do |tool| %>
+						<% tool.reservations.each do |reservation| %>
 
-				<% tool.reservations.each do |reservation| %>
-					<div class="row">
-						<div class=" col-md-3">
-							<%= reservation.start_date.strftime('%v') %>
-						</div>
-						<div class="col-md-6">
-							<%= link_to tool_path(reservation.tool) do %>
-							<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
-							<% end %>
-						</div>
-						<div class="col-md-3 right">
-							<h4> <%= reservation.total %></h4>
-							<%= link_to "Confirm Reservation", tool_reservation_path(@tools, reservation), :method => :patch, class: "btn" %>
-						</div>
-					</div>	
-					<hr>
+							<% if reservation.confirmation == false %>
+								<div class="row">
+									<div class=" col-md-3">
+										<%= reservation.start_date.strftime('%v') %>
+									</div>
+									<div class="col-md-3">
+										<%= link_to tool_path(reservation.tool) do %>
+										<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
+										<% end %>
+									</div>
+									<div class="col-md-3">
+										<h4> <%= reservation.total %></h4>
+									</div>
+									<div class="col-md-3">
+										<%= link_to "Confirm Reservation", tool_reservation_path(@tools, reservation), :method => :patch, class: "btn" %>
+										<%= link_to "Cancel Reservation", tool_reservation_path(@tools, reservation), :method => :delete, data: {confirm: "Are you sure you want to cancel this reservation?"}, class: "btn" %>
+									</div>
+								</div>	
+							<% else %>
+								<div class="row">
+									<div class="col-md-12">
+										<H3>No Pending Reservations, See Upcoming Reservations</H3>
+									</div>
+								</div>	
+
+							<% end %>		
+							<hr>
+						<% end %>	
 					<% end %>
 
-				<% end %>
 
 
-
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-	
 </div>

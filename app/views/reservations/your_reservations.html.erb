@@ -11,26 +11,37 @@
 		<div class="col-md-9">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Your Reservations
+					Upcoming Reservations
 				</div>
 				<div class="panel-body">
 
 				<% @tools.each do |tool| %>
 
 				<% tool.reservations.each do |reservation| %>
-					<div class="row">
-						<div class=" col-md-3">
-							<%= reservation.start_date.strftime('%v') %>
-						</div>
-						<div class="col-md-6">
-							<%= link_to tool_path(reservation.tool) do %>
-							<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
-							<% end %>
-						</div>
-						<div class="col-md-3 right">
-							<h4> <%= reservation.total %></h4>
-						</div>
-					</div>	
+					<% if reservation.confirmation == true %>
+						<div class="row">
+							<div class=" col-md-3">
+								<%= reservation.start_date.strftime('%v') %>
+							</div>
+							<div class="col-md-3">
+								<%= link_to tool_path(reservation.tool) do %>
+								<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
+								<% end %>
+							</div>
+							<div class="col-md-3">
+								<h4> <%= reservation.total %></h4>
+							</div>
+							<div class="col-md-3">
+								<%= link_to "Cancel Reservation", tool_reservation_path(@tools, reservation), :method => :delete, data: {confirm: "Are you sure you want to cancel this reservation?"}, class: "btn" %>
+							</div>
+						</div>	
+					<% else %>
+						<div class="row">
+							<div class="col-md-12">
+								<h2>No Confirmed Reservations</h2>
+							</div>
+						</div>	
+					<% end %>	
 					<hr>
 					<% end %>
 
