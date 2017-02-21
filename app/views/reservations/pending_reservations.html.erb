@@ -17,36 +17,47 @@
 
 					<% @tools.each do |tool| %>	
 
-						<% tool.reservations.each do |reservation| %>
+						<% if tool.reservations.blank? %>
+						<div class="row">
+							<div class="col-md-12">
+								<H3>No Reservations</H3>
+							</div>
+						</div>	
 
-							<% if reservation.confirmation == false %>
-								<div class="row">
-									<div class=" col-md-3">
-										<%= reservation.start_date.strftime('%v') %>
-									</div>
-									<div class="col-md-3">
-										<%= link_to tool_path(reservation.tool) do %>
-										<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
-										<% end %>
-									</div>
-									<div class="col-md-3">
-										<h4> <%= reservation.total %></h4>
-									</div>
-									<div class="col-md-3">
-										<%= link_to "Confirm Reservation", tool_reservation_path(@tools, reservation), :method => :patch, class: "btn" %>
-										<%= link_to "Cancel Reservation", tool_reservation_path(@tools, reservation), :method => :delete, data: {confirm: "Are you sure you want to cancel this reservation?"}, class: "btn" %>
-									</div>
-								</div>	
-							<% else %>
-								<div class="row">
-									<div class="col-md-12">
-										<H3>No Pending Reservations, See Upcoming Reservations</H3>
-									</div>
-								</div>	
 
-							<% end %>		
-							<hr>
-						<% end %>	
+						<% else %>
+
+							<% tool.reservations.each do |reservation| %>
+
+								<% if reservation.confirmation == false %>
+									<div class="row">
+										<div class=" col-md-3">
+											<%= reservation.start_date.strftime('%v') %>
+										</div>
+										<div class="col-md-3">
+											<%= link_to tool_path(reservation.tool) do %>
+											<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
+											<% end %>
+										</div>
+										<div class="col-md-3">
+											<h4> <%= reservation.total %></h4>
+										</div>
+										<div class="col-md-3">
+											<%= link_to "Confirm Reservation", tool_reservation_path(@tools, reservation), :method => :patch, class: "btn" %>
+											<%= link_to "Cancel Reservation", tool_reservation_path(@tools, reservation), :method => :delete, data: {confirm: "Are you sure you want to cancel this reservation?"}, class: "btn" %>
+										</div>
+									</div>	
+								<% else %>
+									<div class="row">
+										<div class="col-md-12">
+											<H3>No Pending Reservations, See Upcoming Reservations</H3>
+										</div>
+									</div>	
+
+								<% end %>		
+								<hr>
+							<% end %>	
+						<% end %>
 					<% end %>
 
 

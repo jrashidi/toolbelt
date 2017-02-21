@@ -33,6 +33,14 @@
 					<td><span id="reservation_days"></span></td>
 				</tr>
 				<tr>
+					<td>Subtotal</td>
+					<td>$<span id="reservation_subtotal"></span></td>
+				</tr>
+				<tr>
+					<td>Booking Fee</td>
+					<td>$<span id="booking_fee"></span></td>
+				</tr>
+				<tr>
 					<td>Total</td>
 					<td>$<span id="reservation_sum"></span></td>
 				</tr>
@@ -147,9 +155,16 @@
 									$('#preview').show();
 									$('#btn_book').attr('disabled', false);
 
-									var total = days * <%= @tool.price %>
+									var subtotal = days * <%= @tool.price %>
+									var booking_fee = subtotal * 0.05
+									var total = subtotal + booking_fee
+
+									var booking_fee_string = (booking_fee).toFixed(2)
+									var total_string = (total).toFixed(2)
 									$('#reservation_days').text(days);
-									$('#reservation_sum').text(total);
+									$('#reservation_subtotal').text(subtotal);
+									$('#booking_fee').text(booking_fee_string);
+									$('#reservation_sum').text(total_string);
 									$('#reservation_total').val(total);
 								}
 							}

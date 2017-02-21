@@ -16,37 +16,46 @@
 				<div class="panel-body">
 
 				<% @tools.each do |tool| %>
-
-				<% tool.reservations.each do |reservation| %>
-					<% if reservation.confirmation == true %>
-						<div class="row">
-							<div class=" col-md-3">
-								<%= reservation.start_date.strftime('%v') %>
-							</div>
-							<div class="col-md-3">
-								<%= link_to tool_path(reservation.tool) do %>
-								<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
-								<% end %>
-							</div>
-							<div class="col-md-3">
-								<h4> <%= reservation.total %></h4>
-							</div>
-							<div class="col-md-3">
-								<%= link_to "Cancel Reservation", tool_reservation_path(@tools, reservation), :method => :delete, data: {confirm: "Are you sure you want to cancel this reservation?"}, class: "btn" %>
-							</div>
-						</div>	
-					<% else %>
+					<% if tool.reservations.blank? %>
 						<div class="row">
 							<div class="col-md-12">
-								<h2>No Confirmed Reservations</h2>
+								<H3>No Reservations</H3>
 							</div>
 						</div>	
-					<% end %>	
-					<hr>
+
+
+					<% else %>
+
+						<% tool.reservations.each do |reservation| %>
+							<% if reservation.confirmation == true %>
+								<div class="row">
+									<div class=" col-md-3">
+										<%= reservation.start_date.strftime('%v') %>
+									</div>
+									<div class="col-md-3">
+										<%= link_to tool_path(reservation.tool) do %>
+										<%= image_tag reservation.tool.photos[0].image(:thumb) if reservation.tool.photos.length > 0 %>
+										<% end %>
+									</div>
+									<div class="col-md-3">
+										<h4> <%= reservation.total %></h4>
+									</div>
+									<div class="col-md-3">
+										<%= link_to "Cancel Reservation", tool_reservation_path(@tools, reservation), :method => :delete, data: {confirm: "Are you sure you want to cancel this reservation?"}, class: "btn" %>
+									</div>
+								</div>	
+							<% else %>
+								<div class="row">
+									<div class="col-md-12">
+										<h2>No Confirmed Reservations</h2>
+									</div>
+								</div>	
+							<% end %>	
+							<hr>
+							<% end %>
+
+						<% end %>
 					<% end %>
-
-				<% end %>
-
 				</div>
 			</div>
 		</div>
