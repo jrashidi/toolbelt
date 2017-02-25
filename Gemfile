@@ -28,6 +28,10 @@ gem 'jquery-ui-rails'
 
 gem 'ransack'
 
+gem 'braintree'
+
+gem 'dotenv-rails'
+
 
 group :development, :test do
   gem 'byebug', platform: :mri

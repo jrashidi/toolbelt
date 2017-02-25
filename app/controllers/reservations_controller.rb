@@ -1,6 +1,14 @@
 class ReservationsController < ApplicationController 
 	before_action :authenticate_user!
 
+	require "rubygems"
+	require "braintree"
+
+	Braintree::Configuration.environment = :sandbox
+	Braintree::Configuration.merchant_id = ENV['MERCHANT_ID']
+	Braintree::Configuration.public_key = ENV['PUBLIC_KEY']
+	Braintree::Configuration.private_key = ENV['PRIVATE_KEY']
+
 	def preload 
 		tool = Tool.find(params[:tool_id])
 		today = Date.today 
