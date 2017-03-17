@@ -1,14 +1,6 @@
 class ReservationsController < ApplicationController 
 	before_action :authenticate_user!
 
-	require "rubygems"
-	require "braintree"
-
-	Braintree::Configuration.environment = :sandbox
-	Braintree::Configuration.merchant_id = ENV['MERCHANT_ID']
-	Braintree::Configuration.public_key = ENV['PUBLIC_KEY']
-	Braintree::Configuration.private_key = ENV['PRIVATE_KEY']
-
 	def preload 
 		tool = Tool.find(params[:tool_id])
 		today = Date.today 
@@ -18,20 +10,21 @@ class ReservationsController < ApplicationController
 	end 
 
 	def preview
+
 		start_date = Date.parse(params[:start_date])
 		end_date = Date.parse(params[:end_date])
 
 		output = {
 			conflict: is_conflict(start_date, end_date)
 		}
-
+		
 		render json: output
 	end
 
 	def create 
 		@reservation = current_user.reservations.create(reservations_params)
 
-		redirect_to @reservation.tool, notice: "Your Rental Is Pending Approval"
+		redirect_to  new_charge_path
 	end 
 
 	def update
@@ -61,7 +54,6 @@ class ReservationsController < ApplicationController
 	def pending_reservations
 		@tools = current_user.tools		
 	end 
-
 
 	private 
 		def is_conflict(start_date, end_date)

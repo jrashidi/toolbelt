@@ -24,6 +24,10 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create, :destroy]
   end 
 
+  resources :managed_accounts
+  
+  resources :charges, only: [:new, :create]
+
   get '/preload' => 'reservations#preload'
   get '/preview' => 'reservations#preview'
 

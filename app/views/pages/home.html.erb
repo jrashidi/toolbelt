@@ -4,7 +4,7 @@
 			<div class="banner-inner text-center">
 				<h1>Welcome To ToolBelt</h1>
 				<h2>The World's Largest Toolbox</h2>
-				<%= search_form_for @search, url: search_path do |f| %>
+			<%= search_form_for @search, url: search_path do |f| %>
 				<div class="row text", style="padding: 40px">
 					<div class="col-md-4 col-sm-4">
 						<%= f.select :tool_type_eq, [["Drill/Driver", "Drill/Driver"], ["Saw", "Saw"], ["Sanders/Polishers", "Sanders/Polishers"], ["Rotary", "Rotary"], ["Grinders", "Grinders"]], id: "tool_type", prompt: "Select", class: "form-control" %>

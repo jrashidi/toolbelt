@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="col-md-3">
+      <div class="row">
+          <div class="thumbnail">
+              
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <h2><%= @reservation.tool.listing_name %></h2>
+      </div>
+      <div class="row">
+          <h4>Reservation Start Date</h4><%= @reservation.start_date.strftime("%A, %m/%d/%Y") %>
+      </div>
+      <div class="row">
+          <h4>Reservation End Date</h4><%= @reservation.end_date.strftime("%A, %m/%d/%Y") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <%= form_tag charges_path do %>
+      <article>
+        <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+        <% end %>
+        <label class="amount">
+          <span>Amount: $<%= @reservation.total %></span>
+        </label>
+        <div class="form-group">
+          <%= link_to "Cancel Reservation", tool_reservation_path(@reservation.tool, @reservation), :method => :delete, data: { confirm: "Are you sure you want to cancel this reservation?" }, class: "btn" %> 
+        </div>  
+        <div class="form-group">
+          <%= hidden_field_tag 'reservation_id', @reservation.id %>
+        </div>
+      </article>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="One Step Away From Your Rental"
+              data-amount="#{@reservation.total}"
+              data-locale="auto">
+                
+      </script>
+
+    <% end %>
+  </div>
+</div>

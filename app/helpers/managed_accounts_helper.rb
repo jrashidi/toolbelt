@@ -1,0 +1,2 @@
+module ManagedAccountsHelper
+end

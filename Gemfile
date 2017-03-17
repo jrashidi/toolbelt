@@ -28,9 +28,8 @@ gem 'jquery-ui-rails'
 
 gem 'ransack'
 
-gem 'braintree'
+gem 'stripe'
 
-gem 'dotenv-rails'
 
 
 group :development, :test do
